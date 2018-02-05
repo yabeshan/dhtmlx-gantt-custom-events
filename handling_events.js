@@ -2,6 +2,48 @@ var ganttEditTaskId;
 var ganttEditTaskItemId;
 var ganttEditTaskItemValue;
 
+function initCSS() {
+    var css = '#context-menu{position: absolute;z-index: 9999;top: 0px;left: 0px;display: none;width: 120px;}#context-menu button{width: 120px;height: 35px;}#select-item {position: absolute;z-index: 9999;background: rgba(250,0,250,.2);pointer-events: none;width: 0px;height: 0px;top: 0px;left: 0px;}#edit-item {position: absolute;z-index: 9999;background: #FFFFFF;width: 0px;height: 0px;top: 0px;left: 0px;border: 15px solid  rgba(0,0,0,.2);-webkit-background-clip: padding-box;background-clip: padding-box;display: none;}#edit-item-input {width: 100%;height: 100%;}',
+    head = document.head || document.getElementsByTagName('head')[0],
+    style = document.createElement('style');
+    style.type = 'text/css';
+    if (style.styleSheet){
+        style.styleSheet.cssText = css; 
+    } else {
+        style.appendChild(document.createTextNode(css));
+    }
+    head.appendChild(style);
+}
+initCSS();
+
+function initHolders() {
+    var selectItem = document.createElement('div');
+    selectItem.id = 'select-item';
+    document.getElementsByTagName("body")[0].appendChild(selectItem);    
+
+    var editItem = document.createElement('div');
+    editItem.id = 'edit-item';
+    var editItemInput = document.createElement('input');
+    editItemInput.id = 'edit-item-input';
+    editItem.appendChild(editItemInput);  
+    document.getElementsByTagName("body")[0].appendChild(editItem);    
+    
+    var contextMenu = document.createElement('div');
+    contextMenu.id = 'context-menu';
+    contextMenu.onclick = hideContextMenu;
+    var contextMenuItem1 = document.createElement('button');
+    var contextMenuItem2 = document.createElement('button');
+    var contextMenuItem3 = document.createElement('button');
+    contextMenuItem1.innerHTML = "Context menu";
+    contextMenuItem2.innerHTML = "Context menu";
+    contextMenuItem3   .innerHTML = "Context menu";
+    contextMenu.appendChild(contextMenuItem1);
+    contextMenu.appendChild(contextMenuItem2);
+    contextMenu.appendChild(contextMenuItem3);
+    document.getElementsByTagName("body")[0].appendChild(contextMenu);
+}
+document.addEventListener("DOMContentLoaded", initHolders);
+
 gantt.attachEvent("onTaskClick", function(id, event) {
     hideContextMenu(event);
     editItemDisabled();
