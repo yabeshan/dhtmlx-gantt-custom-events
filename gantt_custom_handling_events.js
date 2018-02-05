@@ -1,3 +1,30 @@
+
+gantt.attachEvent("onTaskClick", function(id, event) {
+    hideContextMenu(event);
+    editItemDisabled();
+    // selectItem(event);
+    return true;
+});
+
+gantt.attachEvent("onTaskDblClick", function(idTask, event) {
+    ganttEditTaskId = idTask;
+    ganttEditTaskItemId = getItemId(idTask, event);
+    ganttEditTaskItemValue = getElement(event).innerText;
+
+    hideContextMenu(event);
+    editItem(event);
+    return false;
+});
+
+gantt.attachEvent("onContextMenu", function(taskId, linkId, event){
+    editItemDisabled();
+    showContextMenu(event);
+    return false;
+});
+
+
+/********************** INIT ******************/
+var init = true;
 var ganttEditTaskId;
 var ganttEditTaskItemId;
 var ganttEditTaskItemValue;
@@ -44,33 +71,8 @@ function initHolders() {
 }
 document.addEventListener("DOMContentLoaded", initHolders);
 
-gantt.attachEvent("onTaskClick", function(id, event) {
-    hideContextMenu(event);
-    editItemDisabled();
-    // selectItem(event);
-    return true;
-});
 
-gantt.attachEvent("onTaskDblClick", function(idTask, event) {
-    ganttEditTaskId = idTask;
-    ganttEditTaskItemId = getItemId(idTask, event);
-    ganttEditTaskItemValue = getElement(event).innerText;
-
-    hideContextMenu(event);
-    editItem(event);
-    return false;
-});
-
-gantt.attachEvent("onContextMenu", function(taskId, linkId, event){
-    editItemDisabled();
-    showContextMenu(event);
-    return false;
-});
-
-
-/************ UTILS ***********/
-var init = true;
-
+/**************** UTILS ***************/
 function getItemId(idTask, event) {
     var el = getElement(event);
     var parent = (el.className == "gantt_cell") ? event.target.parentElement : event.target.parentElement.parentElement;
