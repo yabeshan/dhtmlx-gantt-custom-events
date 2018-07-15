@@ -30,3 +30,7 @@ gantt performance >> https://docs.dhtmlx.com/gantt/desktop__performance.html
 * [React Bootstrap](https://github.com/react-bootstrap/react-bootstrap)
 * [Firebase](https://firebase.google.com/)
 
+| Question | |
+|---|---|
+| Design a hash map | [Solution](solutions/object_oriented_design/hash_table/hash_map.ipynb)  |
+| Design a least recently used cache | [Solution](solutions/object_oriented_design/lru_cache/lru_cache.ipynb)  |
